@@ -1,328 +1,328 @@
 /* eslint-disable no-unused-vars */
 
-declare type SearchParamProps = {
-  params: { [key: string]: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+declare type SearchParamPropriedades = {
+  parametros: { [key: string]: string };
+  procurarParametros: { [key: string]: string | string[] | undefined };
 };
 
 // ========================================
 
-declare type SignUpParams = {
-  firstName: string;
-  lastName: string;
-  address1: string;
-  city: string;
-  state: string;
-  postalCode: string;
-  dateOfBirth: string;
-  ssn: string;
+declare type SignUpParametros = {
+  primeiroNome: string;
+  ultimoSobrenome: string;
+  endereco1: string;
+  cidade: string;
+  estado: string;
+  cep: string;
+  dataDeNascimento: string;
+  cpf: string;
   email: string;
-  password: string;
+  senha: string;
 };
 
-declare type LoginUser = {
+declare type LoginUsuario = {
   email: string;
-  password: string;
+  senha: string;
 };
 
-declare type User = {
+declare type Usuario = {
   $id: string;
   email: string;
-  userId: string;
+  idDoUsuario: string;
   dwollaCustomerUrl: string;
   dwollaCustomerId: string;
-  firstName: string;
-  lastName: string;
-  address1: string;
-  city: string;
-  state: string;
-  postalCode: string;
-  dateOfBirth: string;
-  ssn: string;
+  primeiroNome: string;
+  ultimoSobrenome: string;
+  endereco1: string;
+  cidade: string;
+  estado: string;
+  cep: string;
+  dataDeNascimento: string;
+  cpf: string;
 };
 
-declare type NewUserParams = {
-  userId: string;
+declare type NewUsuarioParametros = {
+  idDoUsuario: string;
   email: string;
-  name: string;
-  password: string;
+  nome: string;
+  senha: string;
 };
 
 declare type Account = {
   id: string;
-  availableBalance: number;
-  currentBalance: number;
-  officialName: string;
-  mask: string;
-  institutionId: string;
-  name: string;
-  type: string;
-  subtype: string;
+  saldoDisponivel: number;
+  saldoAtual: number;
+  nomeOficial: string;
+  mascara: string;
+  idDaInstituicao: string;
+  nome: string;
+  tipo: string;
+  subTipo: string;
   appwriteItemId: string;
-  sharableId: string;
+  idCompartilhavel: string;
 };
 
-declare type Transaction = {
+declare type Transacao = {
   id: string;
   $id: string;
-  name: string;
-  paymentChannel: string;
-  type: string;
-  accountId: string;
-  amount: number;
-  pending: boolean;
-  category: string;
-  date: string;
-  image: string;
-  type: string;
-  $createdAt: string;
-  channel: string;
-  senderBankId: string;
-  receiverBankId: string;
+  nome: string;
+  canalDePagamento: string;
+  tipo: string;
+  idDaConta: string;
+  quantia: number;
+  pendente: boolean;
+  categoria: string;
+  data: string;
+  imagem: string;
+  tipo: string;
+  $criadoEm: string;
+  canal: string;
+  idDoBancoDoRemetente: string;
+  idDoBancoDoDestinatario: string;
 };
 
-declare type Bank = {
+declare type Banco = {
   $id: string;
-  accountId: string;
-  bankId: string;
-  accessToken: string;
-  fundingSourceUrl: string;
-  userId: string;
-  sharableId: string;
+  idDaConta: string;
+  idDoBanco: string;
+  tokenDeAcesso: string;
+  urlDaFonte: string;
+  idDoUsuario: string;
+  idCompartilhavel: string;
 };
 
-declare type AccountTypes =
-  | "depository"
-  | "credit"
-  | "loan "
-  | "investment"
-  | "other";
+declare type TipoDeConta =
+  | "depósito"
+  | "crédito"
+  | "empréstimo "
+  | "investimento"
+  | "outro";
 
-declare type Category = "Food and Drink" | "Travel" | "Transfer";
+declare type Categoria = "Alimentos e Bebidas" | "Viagens" | "Transferências";
 
-declare type CategoryCount = {
-  name: string;
-  count: number;
-  totalCount: number;
+declare type CategoriaSoma = {
+  nome: string;
+  soma: number;
+  total: number;
 };
 
-declare type Receiver = {
-  firstName: string;
-  lastName: string;
+declare type Destinatario = {
+  primeiroNome: string;
+  ultimoSobreNome: string;
 };
 
-declare type TransferParams = {
-  sourceFundingSourceUrl: string;
-  destinationFundingSourceUrl: string;
-  amount: string;
+declare type ParametrosDeTransferencia = {
+  urlDaFonte: string;
+  urlDoDestinatario: string;
+  quantia: string;
 };
 
-declare type AddFundingSourceParams = {
+declare type AdicionarFonteParametros = {
   dwollaCustomerId: string;
   processorToken: string;
-  bankName: string;
+  nomeDoBanco: string;
 };
 
-declare type NewDwollaCustomerParams = {
-  firstName: string;
-  lastName: string;
+declare type NewDwollaCustomerParametros = {
+  primeiroNome: string;
+  ultimoSobreNome: string;
   email: string;
-  type: string;
-  address1: string;
-  city: string;
-  state: string;
-  postalCode: string;
-  dateOfBirth: string;
-  ssn: string;
+  tipo: string;
+  endereco1: string;
+  cidade: string;
+  estado: string;
+  cep: string;
+  dataDeNascimento: string;
+  cpf: string;
 };
 
-declare interface CreditCardProps {
-  account: Account;
-  userName: string;
-  showBalance?: boolean;
+declare interface CartaoDeCreditoPropriedades {
+  conta: Account;
+  nomeDeUsuario: string;
+  mostrarSaldo?: boolean;
 }
 
-declare interface BankInfoProps {
-  account: Account;
+declare interface InformacoesDoBancoPropriedades {
+  conta: Account;
   appwriteItemId?: string;
-  type: "full" | "card";
+  tipo: "full" | "card";
 }
 
-declare interface HeaderBoxProps {
-  type?: "title" | "greeting";
-  title: string;
-  subtext: string;
-  user?: string;
+declare interface HeaderBoxPropriedades {
+  tipo?: "titulo" | "cumprimento";
+  titulo: string;
+  subTitulo: string;
+  usuario?: string;
 }
 
-declare interface MobileNavProps {
-  user: User;
+declare interface MobileNavPropriedades {
+  usuario: Usuario;
 }
 
-declare interface PageHeaderProps {
-  topTitle: string;
-  bottomTitle: string;
-  topDescription: string;
-  bottomDescription: string;
-  connectBank?: boolean;
+declare interface PageHeaderPropriedades {
+  tituloTopo: string;
+  tituloInferior: string;
+  DescricaoTopo: string;
+  DescricaoInferior: string;
+  conectarBanco?: boolean;
 }
 
-declare interface PaginationProps {
+declare interface PaginacaoPropriedades {
   page: number;
   totalPages: number;
 }
 
-declare interface PlaidLinkProps {
-  user: User;
-  variant?: "primary" | "ghost";
+declare interface PlaidLinkPropriedades {
+  usuario: Usuario;
+  versao?: "primary" | "ghost";
   dwollaCustomerId?: string;
 }
 
-// declare type User = sdk.Models.Document & {
-//   accountId: string;
+// declare type Usuario = sdk.Models.Document & {
+//   idDaConta: string;
 //   email: string;
-//   name: string;
+//   nome: string;
 //   items: string[];
-//   accessToken: string;
-//   image: string;
+//   tokenDeAcesso: string;
+//   imagem: string;
 // };
 
-declare interface AuthFormProps {
-  type: "sign-in" | "sign-up";
+declare interface FormularioDeAutenticacaoPropriedades {
+  type: "entrar" | "cadastrar";
 }
 
-declare interface BankDropdownProps {
-  accounts: Account[];
+declare interface DropdownBancoPropriedades {
+  contas: Account[];
   setValue?: UseFormSetValue<any>;
   otherStyles?: string;
 }
 
-declare interface BankTabItemProps {
+declare interface BankTabItemPropriedades {
   account: Account;
   appwriteItemId?: string;
 }
 
-declare interface TotlaBalanceBoxProps {
-  accounts: Account[];
-  totalBanks: number;
-  totalCurrentBalance: number;
+declare interface SaldoTotalBoxPropriedades {
+  contas: Account[];
+  todosBancos: number;
+  saldoTotalAtual: number;
 }
 
-declare interface FooterProps {
-  user: User;
+declare interface FooterPropriedades {
+  Usuario: Usuario;
 }
 
-declare interface RightSidebarProps {
-  user: User;
-  transactions: Transaction[];
-  banks: Bank[] & Account[];
+declare interface RightSidebarPropriedades {
+  usuario: Usuario;
+  transacoes: Transaction[];
+  bancos: Bank[] & Account[];
 }
 
-declare interface SiderbarProps {
-  user: User;
+declare interface SiderbarPropriedades {
+  usuario: Usuario;
 }
 
-declare interface RecentTransactionsProps {
-  accounts: Account[];
-  transactions: Transaction[];
+declare interface PropriedadesDeTransacoesRecentes {
+  contas: Account[];
+  transacoes: Transaction[];
   appwriteItemId: string;
   page: number;
 }
 
-declare interface TransactionHistoryTableProps {
-  transactions: Transaction[];
+declare interface TabelaDeHistoricoDePropriedadesDaTransacao {
+  transacoes: Transaction[];
   page: number;
 }
 
-declare interface CategoryBadgeProps {
-  category: string;
+declare interface CategoriaBadgePropriedades {
+  categoria: string;
 }
 
-declare interface TransactionTableProps {
-  transactions: Transaction[];
+declare interface TransactionTablePropriedades {
+  transacoes: Transaction[];
 }
 
-declare interface CategoryProps {
-  category: CategoryCount;
+declare interface categoriaPropriedades {
+  categoria: categoriaCount;
 }
 
-declare interface DoughnutChartProps {
-  accounts: Account[];
+declare interface DoughnutChartPropriedades {
+  contas: Account[];
 }
 
-declare interface PaymentTransferFormProps {
-  accounts: Account[];
+declare interface PropriedadesDaFormaDePagamento {
+  contas: Account[];
 }
 
 // Actions
-declare interface getAccountsProps {
-  userId: string;
+declare interface getPropriedadesDasContas {
+  idDoUsuario: string;
 }
 
-declare interface getAccountProps {
+declare interface getAccountPropriedades {
   appwriteItemId: string;
 }
 
-declare interface getInstitutionProps {
-  institutionId: string;
+declare interface getInstitutionPropriedades {
+  idDaInstituicao: string;
 }
 
-declare interface getTransactionsProps {
-  accessToken: string;
+declare interface getTransacoesPropriedades {
+  tokenDeAcesso: string;
 }
 
 declare interface CreateFundingSourceOptions {
-  customerId: string; // Dwolla Customer ID
-  fundingSourceName: string; // Dwolla Funding Source Name
-  plaidToken: string; // Plaid Account Processor Token
+  idDoCliente: string; // Dwolla Customer ID
+  nomeDaFonte: string; // Dwolla Funding Source nome
+  tokenDoPlaid: string; // Plaid Account Processor Token
   _links: object; // Dwolla On Demand Authorization Link
 }
 
-declare interface CreateTransactionProps {
-  name: string;
-  amount: string;
-  senderId: string;
-  senderBankId: string;
-  receiverId: string;
-  receiverBankId: string;
+declare interface CreateTransactionPropriedades {
+  nome: string;
+  quantia: string;
+  idDoRemetente: string;
+  idDoBancoRemetente: string;
+  idDoDestinatario: string;
+  idDoBancoDestinatario: string;
   email: string;
 }
 
-declare interface getTransactionsByBankIdProps {
-  bankId: string;
+declare interface getTransacoesByidDoBancoPropriedades {
+  idDoBanco: string;
 }
 
-declare interface signInProps {
+declare interface signInPropriedades {
   email: string;
-  password: string;
+  senha: string;
 }
 
-declare interface getUserInfoProps {
-  userId: string;
+declare interface getUsuarioInfoPropriedades {
+  idDoUsuario: string;
 }
 
-declare interface exchangePublicTokenProps {
-  publicToken: string;
-  user: User;
+declare interface exchangePublicTokenPropriedades {
+  tokenPublico: string;
+  usuario: Usuario;
 }
 
-declare interface createBankAccountProps {
+declare interface createBankAccountPropriedades {
   accessToken: string;
-  userId: string;
-  accountId: string;
-  bankId: string;
-  fundingSourceUrl: string;
-  sharableId: string;
+  idDoUsuario: string;
+  idDaConta: string;
+  idDoBanco: string;
+  urlDaFonte: string;
+  idCompartilhavel: string;
 }
 
-declare interface getBanksProps {
-  userId: string;
+declare interface getBanksPropriedades {
+  idDoUsuario: string;
 }
 
-declare interface getBankProps {
-  documentId: string;
+declare interface getBankPropriedades {
+  idDoDocumento: string;
 }
 
-declare interface getBankByAccountIdProps {
-  accountId: string;
+declare interface getBankByidDaContaPropriedades {
+  idDaConta: string;
 }

@@ -8,8 +8,8 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 // FORMAT DATE TIME
-export const formatDateTime = (dateString: Date) => {
-  const dateTimeOptions: Intl.DateTimeFormatOptions = {
+export const formatarDataEHora = (dateString: Date) => {
+  const dataEHoraOptions: Intl.DateTimeFormatOptions = {
     weekday: "short", // abbreviated weekday name (e.g., 'Mon')
     month: "short", // abbreviated month name (e.g., 'Oct')
     day: "numeric", // numeric day of the month (e.g., '25')
@@ -18,92 +18,92 @@ export const formatDateTime = (dateString: Date) => {
     hour12: true, // use 12-hour clock (true) or 24-hour clock (false)
   };
 
-  const dateDayOptions: Intl.DateTimeFormatOptions = {
+  const dataDiaOptions: Intl.DateTimeFormatOptions = {
     weekday: "short", // abbreviated weekday name (e.g., 'Mon')
     year: "numeric", // numeric year (e.g., '2023')
     month: "2-digit", // abbreviated month name (e.g., 'Oct')
     day: "2-digit", // numeric day of the month (e.g., '25')
   };
 
-  const dateOptions: Intl.DateTimeFormatOptions = {
+  const dataOptions: Intl.DateTimeFormatOptions = {
     month: "short", // abbreviated month name (e.g., 'Oct')
     year: "numeric", // numeric year (e.g., '2023')
     day: "numeric", // numeric day of the month (e.g., '25')
   };
 
-  const timeOptions: Intl.DateTimeFormatOptions = {
+  const horaOptions: Intl.DateTimeFormatOptions = {
     hour: "numeric", // numeric hour (e.g., '8')
     minute: "numeric", // numeric minute (e.g., '30')
     hour12: true, // use 12-hour clock (true) or 24-hour clock (false)
   };
 
-  const formattedDateTime: string = new Date(dateString).toLocaleString(
-    "en-US",
-    dateTimeOptions
+  const dataEHoraFormatados: string = new Date(dateString).toLocaleString(
+    "pt-BR",
+    dataEHoraOptions
   );
 
-  const formattedDateDay: string = new Date(dateString).toLocaleString(
-    "en-US",
-    dateDayOptions
+  const dataDiaFormatada: string = new Date(dateString).toLocaleString(
+    "pt-BR",
+    dataDiaOptions
   );
 
-  const formattedDate: string = new Date(dateString).toLocaleString(
-    "en-US",
-    dateOptions
+  const DataFormatada: string = new Date(dateString).toLocaleString(
+    "pt-BR",
+    dataOptions
   );
 
-  const formattedTime: string = new Date(dateString).toLocaleString(
-    "en-US",
-    timeOptions
+  const horaFormatada: string = new Date(dateString).toLocaleString(
+    "pt-BR",
+    horaOptions
   );
 
   return {
-    dateTime: formattedDateTime,
-    dateDay: formattedDateDay,
-    dateOnly: formattedDate,
-    timeOnly: formattedTime,
+    dataEhora: dataEHoraFormatados,
+    dataDia: dataDiaFormatada,
+    dataOnly: DataFormatada,
+    horaOnly: horaFormatada,
   };
 };
 
-export function formatAmount(amount: number): string {
-  const formatter = new Intl.NumberFormat("en-US", {
+export function formatarQuantia(quantia: number): string {
+  const formatter = new Intl.NumberFormat("pt-BR", {
     style: "currency",
-    currency: "USD",
+    currency: "BRL",
     minimumFractionDigits: 2,
   });
 
-  return formatter.format(amount);
+  return formatter.format(quantia);
 }
 
 export const parseStringify = (value: any) => JSON.parse(JSON.stringify(value));
 
-export const removeSpecialCharacters = (value: string) => {
+export const removerCaracteresEspeciais = (value: string) => {
   return value.replace(/[^\w\s]/gi, "");
 };
 
-interface UrlQueryParams {
-  params: string;
-  key: string;
-  value: string;
+interface UrlQueryParametros {
+  parametros: string;
+  chave: string;
+  valor: string;
 }
 
-export function formUrlQuery({ params, key, value }: UrlQueryParams) {
-  const currentUrl = qs.parse(params);
+export function formarQueryUrl({ parametros, chave, valor }: UrlQueryParametros) {
+  const urlAtual = qs.parse(parametros);
 
-  currentUrl[key] = value;
+  urlAtual[chave] = valor;
 
   return qs.stringifyUrl(
     {
       url: window.location.pathname,
-      query: currentUrl,
+      query: urlAtual,
     },
     { skipNull: true }
   );
 }
 
-export function getAccountTypeColors(type: AccountTypes) {
+export function getAccountTypeColors(type: TipoDeConta) {
   switch (type) {
-    case "depository":
+    case "depósito":
       return {
         bg: "bg-blue-25",
         lightBg: "bg-blue-100",
@@ -111,7 +111,7 @@ export function getAccountTypeColors(type: AccountTypes) {
         subText: "text-blue-700",
       };
 
-    case "credit":
+    case "crédito":
       return {
         bg: "bg-success-25",
         lightBg: "bg-success-100",
@@ -129,67 +129,57 @@ export function getAccountTypeColors(type: AccountTypes) {
   }
 }
 
-export function countTransactionCategories(
-  transactions: Transaction[]
-): CategoryCount[] {
-  const categoryCounts: { [category: string]: number } = {};
-  let totalCount = 0;
+export function somaCategoriasDaTransacao(
+  transactions: Transacao[]
+): CategoriaSoma[] {
+  const categoriaDeSoma: { [category: string]: number } = {};
+  let somaTotal = 0;
 
-  // Iterate over each transaction
   transactions &&
     transactions.forEach((transaction) => {
-      // Extract the category from the transaction
-      const category = transaction.category;
+      const categoria = transaction.categoria;
 
-      // If the category exists in the categoryCounts object, increment its count
-      if (categoryCounts.hasOwnProperty(category)) {
-        categoryCounts[category]++;
+      if (categoriaDeSoma.hasOwnProperty(categoria)) {
+        categoriaDeSoma[categoria]++;
       } else {
-        // Otherwise, initialize the count to 1
-        categoryCounts[category] = 1;
+        categoriaDeSoma[categoria] = 1;
       }
-
-      // Increment total count
-      totalCount++;
+      somaTotal++;
     });
 
-  // Convert the categoryCounts object to an array of objects
-  const aggregatedCategories: CategoryCount[] = Object.keys(categoryCounts).map(
+  const categoriasAgregadas: CategoriaSoma[] = Object.keys(categoriaDeSoma).map(
     (category) => ({
-      name: category,
-      count: categoryCounts[category],
-      totalCount,
+      nome: category,
+      soma: categoriaDeSoma[category],
+      total: somaTotal,
     })
   );
 
-  // Sort the aggregatedCategories array by count in descending order
-  aggregatedCategories.sort((a, b) => b.count - a.count);
+  categoriasAgregadas.sort((a, b) => b.soma - a.soma);
 
-  return aggregatedCategories;
+  return categoriasAgregadas;
 }
 
-export function extractCustomerIdFromUrl(url: string) {
-  // Split the URL string by '/'
-  const parts = url.split("/");
+export function getIdDoCLientePelaUrl(url: string) {
+  const parteDaUrl = url.split("/")
 
-  // Extract the last part, which represents the customer ID
-  const customerId = parts[parts.length - 1];
+  const idDoCliente = parteDaUrl[parteDaUrl.length - 1];
 
-  return customerId;
+  return idDoCliente;
 }
 
-export function encryptId(id: string) {
+export function encriptografarId(id: string) {
   return btoa(id);
 }
 
-export function decryptId(id: string) {
+export function descriptografarId(id: string) {
   return atob(id);
 }
 
-export const getTransactionStatus = (date: Date) => {
-  const today = new Date();
-  const twoDaysAgo = new Date(today);
-  twoDaysAgo.setDate(today.getDate() - 2);
+export const getStatusDaTransacao = (date: Date) => {
+  const hoje = new Date();
+  const doisDiasAtras = new Date(hoje);
+  doisDiasAtras.setDate(hoje.getDate() - 2);
 
-  return date > twoDaysAgo ? "Processing" : "Success";
+  return date > doisDiasAtras ? "Processando" : "Sucesso";
 };
